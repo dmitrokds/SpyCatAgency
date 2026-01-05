@@ -10,7 +10,11 @@ async def main():
     
     app.include_router(spy_cats_router, prefix="/spy-cat", tags=["Spy Cats"])
     
-    uvicorn.run(app=app)
+    
+    config = uvicorn.Config(app=app, log_level="info")
+    server = uvicorn.Server(config)
+    
+    await server.serve()
     
     
 if __name__ == "__main__":
